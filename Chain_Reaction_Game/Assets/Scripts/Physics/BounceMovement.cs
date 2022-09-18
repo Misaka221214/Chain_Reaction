@@ -198,7 +198,7 @@ public class BounceMovement : MonoBehaviour {
         if (enable) {
             drag = dragCoe;
         } else {
-            drag = boost;
+            drag = 1f;
         }
     }
 

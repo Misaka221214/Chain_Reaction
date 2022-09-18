@@ -7,9 +7,13 @@ public class ObstacleCollision : MonoBehaviour {
     private readonly float damageMinus = -0.5f;
     private readonly int specialObstacleThreshold = 5;
     private readonly float level1BossMaxHealth = 20f;
+    private readonly float level2BossMaxHealth = 20f;
+    private readonly float level3BossMaxHealth = 20f;
 
     private GameObject ball;
     private float level1BossHealth = 20f;
+    private float level2BossHealth = 20f;
+    private float level3BossHealth = 20f;
 
     public ObstacleEnum obstacleType;
     public int collisionDestroyCounter = 0;
@@ -88,6 +92,12 @@ public class ObstacleCollision : MonoBehaviour {
             case ObstacleEnum.LEVEL_1_BOSS:
                 Level1BossCollision();
                 break;
+            case ObstacleEnum.LEVEL_2_BOSS:
+                Level2BossCollision();
+                break;
+            case ObstacleEnum.LEVEL_3_BOSS:
+                Level3BossCollision();
+                break;
             default:
                 BasicCollision();
                 break;
@@ -118,17 +128,61 @@ public class ObstacleCollision : MonoBehaviour {
         }
     }
 
-    public float GetBossHealthPercentage(LevelEnum level) {
-        switch (level) {
-            case LevelEnum.LEVEL_1:
-                return level1BossHealth / level1BossMaxHealth;
-            //case LevelEnum.LEVEL_2:
-            //    break;
-            //case LevelEnum.LEVEL_3:
-            //    break;
-            default:
-                return 0f;
+    private void Level2BossCollision() {
+        BounceMovement bm = ball.GetComponentInChildren<BounceMovement>();
+        if (bm) {
+            level2BossHealth -= bm.damage;
+            LevelData.activeBalls--;
+            Destroy(ball);
         }
+
+        if (level2BossHealth <= 0) {
+            LevelData.level2BossIsDead = true;
+            // TODO: Next screen
+            LevelProgressionManager.Instance.HandleOnLevelPassed();
+            return;
+        }
+
+        GameObject gamePlayManagerObject = GameObject.Find("LevelGamePlayManager");
+        if (gamePlayManagerObject) {
+            LevelGamePlayManager levelGamePlayManager = gamePlayManagerObject.GetComponentInChildren<LevelGamePlayManager>();
+            if (levelGamePlayManager) {
+                levelGamePlayManager.InstantiateBall();
+            }
+        }
+    }
+
+    private void Level3BossCollision() {
+        BounceMovement bm = ball.GetComponentInChildren<BounceMovement>();
+        if (bm) {
+            level3BossHealth -= bm.damage;
+            LevelData.activeBalls--;
+            Destroy(ball);
+        }
+
+        if (level3BossHealth <= 0) {
+            LevelData.level3BossIsDead = true;
+            // TODO: Next screen
+            LevelProgressionManager.Instance.HandleOnLevelPassed();
+            return;
+        }
+
+        GameObject gamePlayManagerObject = GameObject.Find("LevelGamePlayManager");
+        if (gamePlayManagerObject) {
+            LevelGamePlayManager levelGamePlayManager = gamePlayManagerObject.GetComponentInChildren<LevelGamePlayManager>();
+            if (levelGamePlayManager) {
+                levelGamePlayManager.InstantiateBall();
+            }
+        }
+    }
+
+    public float GetBossHealthPercentage(LevelEnum level) {
+        return level switch {
+            LevelEnum.LEVEL_1 => level1BossHealth / level1BossMaxHealth,
+            LevelEnum.LEVEL_2 => level2BossHealth / level2BossMaxHealth,
+            LevelEnum.LEVEL_3 => level3BossHealth / level3BossMaxHealth,
+            _ => 0f,
+        };
     }
 
     private void BasicCollision() {

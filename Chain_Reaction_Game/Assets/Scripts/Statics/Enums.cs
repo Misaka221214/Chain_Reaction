@@ -13,7 +13,9 @@ public enum ObstacleEnum {
     TWICE,
     FALL_STRAIGHT,
     LEVEL_1_BOSS,
-    RANDOM
+    RANDOM,
+    LEVEL_2_BOSS,
+    LEVEL_3_BOSS,
 }
 
 public enum LevelEnum {
