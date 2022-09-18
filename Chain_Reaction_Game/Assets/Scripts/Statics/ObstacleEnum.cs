@@ -10,5 +10,7 @@ public enum ObstacleEnum
     DUPLICATE,
     ENLARGE,
     BOUNCY,
-    HEAVY
+    HEAVY,
+    TWICE,
+    FALL_STRAIGHT
 }

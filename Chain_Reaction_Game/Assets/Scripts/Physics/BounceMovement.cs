@@ -6,8 +6,8 @@ public class BounceMovement : MonoBehaviour {
     private int boostCollisionCount = 0;
     private bool boostFlag = false;
     private bool jumpFlag = false;
-    private float dragCoe = 0.7f;
-    private bool fallThroughFlag = false;
+    private float dragCoe = 0.8f;
+    private bool heavyFlag = false;
 
     private readonly int boostIncreament = 5;
     private readonly float minSpeed = 1f;
@@ -73,7 +73,13 @@ public class BounceMovement : MonoBehaviour {
                 Bouncy();
                 break;
             case ObstacleEnum.HEAVY:
-                FallThrough();
+                Heavy();
+                break;
+            case ObstacleEnum.TWICE:
+                Bounce(collision.contacts[0].normal);
+                break;
+            case ObstacleEnum.FALL_STRAIGHT:
+                FallStraight();
                 break;
             default:
                 Bounce(collision.contacts[0].normal);
@@ -82,7 +88,7 @@ public class BounceMovement : MonoBehaviour {
     }
 
     private void Bounce(Vector2 collisionNormal) {
-        if (fallThroughFlag) return;
+        if (heavyFlag) return;
         float speed = lastFrameVelocity.magnitude * drag;
         drag = boostFlag ? 1f : dragCoe;
         if (speed < minSpeed) return;
@@ -90,8 +96,12 @@ public class BounceMovement : MonoBehaviour {
         rb.velocity = speed * direction;
     }
 
-    private void FallThrough() {
-        fallThroughFlag = true;
+    private void FallStraight() {
+        rb.velocity = new(0, 0);
+    }
+
+    private void Heavy() {
+        heavyFlag = true;
     }
 
     private void Enlarge() {
