@@ -32,15 +32,34 @@ public class LevelProgressionManager : MonoBehaviour {
 
         Scene curScene = SceneManager.GetActiveScene();
         int sceneCount = SceneManager.sceneCountInBuildSettings;
-        int nextSceneIndex = curScene.buildIndex + 1;
-        if (nextSceneIndex < sceneCount - 2) //Haedcoded, -2 because of the Win Scene and Lose Scene
+        int nextLevelIndex = curScene.buildIndex + 1;
+
+        // Load the buff selection scene unless this is the last level
+
+        if (nextLevelIndex < sceneCount - 3) //Hardcoded, -2 because of the Win Scene, Lose Scene and BuffSelection Scene
         {
-            curLevelBuildIndex = nextSceneIndex;
-            SceneManager.LoadScene(curLevelBuildIndex);
-        } else {
+            curLevelBuildIndex = nextLevelIndex;
+            SceneManager.LoadScene("BuffSelection");
+        }
+        else
+        {
             SceneManager.LoadScene("Win");
             LevelData.ResetLevelData();
         }
+
+        //if (nextSceneIndex < sceneCount - 2) //Hardcoded, -2 because of the Win Scene and Lose Scene
+        //{
+        //    curLevelBuildIndex = nextSceneIndex;
+        //    SceneManager.LoadScene(curLevelBuildIndex);
+        //} else {
+        //    SceneManager.LoadScene("Win");
+        //    LevelData.ResetLevelData();
+        //}
+    }
+
+    public void HandleFinishBuffSelection()
+    {
+        SceneManager.LoadScene(curLevelBuildIndex);
     }
 
     public void LoadLoseScreen() {

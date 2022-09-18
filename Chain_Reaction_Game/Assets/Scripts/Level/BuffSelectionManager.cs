@@ -83,8 +83,14 @@ public class BuffSelectionManager : MonoBehaviour
 
         if (numLeftToChoose <= 0)
         {
-
+            StartCoroutine(LoadNextLevel());
         }
+    }
+
+    IEnumerator LoadNextLevel()
+    {
+        yield return new WaitForSeconds(1f);
+        LevelProgressionManager.Instance.HandleFinishBuffSelection();
     }
 
     public void UpdateInventoryDisplay()
