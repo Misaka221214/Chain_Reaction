@@ -5,15 +5,15 @@ public class ObstacleCollision : MonoBehaviour {
     private readonly int twiceCollisionCount = 1;
     private readonly float damageAddition = 1f;
     private readonly float damageMinus = -0.5f;
-    private readonly int specialObstacleThreshold = 5;
-    private readonly float level1BossMaxHealth = 100f;
-    private readonly float level2BossMaxHealth = 100f;
-    private readonly float level3BossMaxHealth = 100f;
+    private readonly int specialObstacleThreshold = 10;
+    private readonly float level1BossMaxHealth = 200f;
+    private readonly float level2BossMaxHealth = 200f;
+    private readonly float level3BossMaxHealth = 200f;
 
     private GameObject ball;
-    private float level1BossHealth = 100f;
-    private float level2BossHealth = 100f;
-    private float level3BossHealth = 100f;
+    private float level1BossHealth = 200f;
+    private float level2BossHealth = 200f;
+    private float level3BossHealth = 200f;
 
     public ObstacleEnum obstacleType;
     public int collisionDestroyCounter = 0;

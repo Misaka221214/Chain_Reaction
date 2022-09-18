@@ -137,5 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drag: 0.9
-  boost: 5
   damage: 0
+  dragCoe: 0.9
