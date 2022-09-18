@@ -5,12 +5,28 @@ public class ObstacleCollision : MonoBehaviour {
     private readonly int twiceCollisionCount = 1;
     private readonly float damageAddition = 1f;
     private readonly float damageMinus = -0.5f;
+    private readonly int specialObstacleThreshold = 5;
+    //private readonly float level1BossMaxHealth = 20f;
 
     private GameObject ball;
+    private float level1BossHealth = 20f;
 
     public ObstacleEnum obstacleType;
     public int collisionDestroyCounter = 0;
     public float deltaDamage = 0f;
+
+    private void Start() {
+        if(obstacleType == ObstacleEnum.RANDOM) {
+            int chance = Random.Range(0, 100);
+            GameObject prefab = Resources.Load(PrefabDict.prefabDict[ObstacleEnum.BASIC]) as GameObject;
+            if (chance < specialObstacleThreshold) {
+                int index = Random.Range(0, LevelData.playerObstacleList.Count);
+                prefab = Resources.Load(PrefabDict.prefabDict[LevelData.playerObstacleList[index]]) as GameObject;
+            }
+            Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         ball = collision.collider.gameObject;
@@ -69,9 +85,36 @@ public class ObstacleCollision : MonoBehaviour {
                 BasicCollision();
                 AddDamageToBall(basicObstacleDamage);
                 break;
+            case ObstacleEnum.LEVEL_1_BOSS:
+                Level1BossCollision();
+                break;
             default:
                 BasicCollision();
                 break;
+        }
+    }
+
+    private void Level1BossCollision() {
+        BounceMovement bm = ball.GetComponentInChildren<BounceMovement>();
+        if (bm) {
+            level1BossHealth -= bm.damage;
+            LevelData.activeBalls--;
+            Destroy(ball);
+        }
+
+        if (level1BossHealth <= 0) {
+            LevelData.level1BossIsDead = true;
+            // TODO: Next screen
+            LevelProgressionManager.Instance.HandleOnLevelPassed();
+            return;
+        }
+
+        GameObject gamePlayManagerObject = GameObject.Find("LevelGamePlayManager");
+        if (gamePlayManagerObject) {
+            LevelGamePlayManager levelGamePlayManager = gamePlayManagerObject.GetComponentInChildren<LevelGamePlayManager>();
+            if (levelGamePlayManager) {
+                levelGamePlayManager.InstantiateBall();
+            }
         }
     }
 
