@@ -8,8 +8,8 @@ public class NewGameButton : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("TODO:LOAD SCENE");
-        // TODO: Load the proper Scene
+        //Debug.Log("TODO:LOAD SCENE");
+        SceneManager.LoadScene(1);
     }
 
     // Start is called before the first frame update
