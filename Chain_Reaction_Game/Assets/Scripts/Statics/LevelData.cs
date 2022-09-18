@@ -20,6 +20,7 @@ public static class LevelData {
     public static List<ObstacleEnum> playerObstacleList = new() { ObstacleEnum.BOOST, ObstacleEnum.ENLARGE, ObstacleEnum.BOUNCY };
 
     public static void ResetLevelData() {
+        activeBalls = 0;
         level1RemainingBalls = level1MaxBalls;
         level2RemainingBalls = level2MaxBalls;
         level3RemainingBalls = level3MaxBalls;
