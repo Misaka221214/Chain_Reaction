@@ -10,7 +10,7 @@ public class NewGameButton : MonoBehaviour, IPointerClickHandler
     {
         //Debug.Log("TODO:LOAD SCENE");
         LevelProgressionManager.Instance.ResetLevelProgress();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("BuffSelection");
     }
 
     // Start is called before the first frame update

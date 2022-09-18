@@ -7018,6 +7018,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boost Circle Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 4206719055716680647, guid: ac3965ba8657b4ba2a6b91dafd13da4a, type: 3}
+      propertyPath: collisionDestroyCounter
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4206719055716680646, guid: ac3965ba8657b4ba2a6b91dafd13da4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac3965ba8657b4ba2a6b91dafd13da4a, type: 3}
@@ -9261,6 +9265,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2533914306467884430, guid: e2085a1a8e56b494f832964d63d867ea, type: 3}
+      propertyPath: collisionDestroyCounter
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2533914306467884433, guid: e2085a1a8e56b494f832964d63d867ea, type: 3}
       propertyPath: m_Name
       value: Duplicate Circle Obstacle
@@ -10926,6 +10934,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7482667652216324306, guid: c571ddff31dca5440aa93a61b2e5534e, type: 3}
+    - target: {fileID: 2503581833841119026, guid: d6d22c50c3f094026adc21a940cff2b4, type: 3}
+      propertyPath: collisionDestroyCounter
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2503581833841119029, guid: d6d22c50c3f094026adc21a940cff2b4, type: 3}
       propertyPath: m_Name
       value: Jump Circle Obstacle

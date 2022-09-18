@@ -1,9 +1,9 @@
 using UnityEngine;
 
 public class BounceMovement : MonoBehaviour {
-    private readonly float boostIncreament = 3f;
+    private readonly float boostIncreament = 2f;
     private readonly float minSpeed = 1f;
-    private readonly Vector2 jumpForce = new(0, 500);
+    private readonly Vector2 jumpForce = new(0, 800);
     private readonly float fallThreshold = -3f;
     private readonly float enlargeScale = 1.5f;
     private readonly float heavyDamageMultiplier = 1.5f;
@@ -17,15 +17,17 @@ public class BounceMovement : MonoBehaviour {
     private bool jumpFlag = false;
     private bool heavyFlag = false;
     private float damageMultipler = 1f;
+    private GameObject ball;
 
 
     public float drag;
-    public float boost;
+    private float boost = 1.2f;
     public float damage;
-    public float dragCoe = 0.8f;
+    public float dragCoe = 0.9f;
 
     private void OnEnable() {
         rb = GetComponent<Rigidbody2D>();
+        ball = Resources.Load("Prefabs/Basic Ball") as GameObject;
     }
 
     private void FixedUpdate() {
@@ -148,9 +150,9 @@ public class BounceMovement : MonoBehaviour {
     }
 
     private void Duplicate() {
-        GameObject go = Instantiate(gameObject);
+        GameObject go = Instantiate(ball, gameObject.transform.position, Quaternion.identity);
         LevelData.activeBalls++;
-        go.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-200, 200), Random.Range(-200, 200)));
+        go.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-800, 800), Random.Range(-800, 800)));
     }
 
     private void SetBoost(bool enable) {
@@ -200,7 +202,7 @@ public class BounceMovement : MonoBehaviour {
         if (enable) {
             drag = dragCoe;
         } else {
-            drag = 1f;
+            drag = boost;
         }
     }
 
