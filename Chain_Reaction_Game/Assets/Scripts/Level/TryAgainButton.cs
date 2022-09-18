@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
-public class NewGameButton : MonoBehaviour, IPointerClickHandler
+public class TryAgainButton : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("TODO:LOAD SCENE");
-        LevelProgressionManager.Instance.ResetLevelProgress();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(LevelProgressionManager.Instance.curLevelBuildIndex);
     }
 
     // Start is called before the first frame update

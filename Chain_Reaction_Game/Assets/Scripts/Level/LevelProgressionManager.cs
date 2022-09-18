@@ -9,6 +9,7 @@ public class LevelProgressionManager : MonoBehaviour
     public static LevelProgressionManager Instance { get; private set; }
 
     //public System.Action OnLevelPassed;
+    public int curLevelBuildIndex;
 
     private void Awake()
     {
@@ -19,6 +20,8 @@ public class LevelProgressionManager : MonoBehaviour
         else
         {
             Instance = this;
+            ResetLevelProgress();
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -39,12 +42,19 @@ public class LevelProgressionManager : MonoBehaviour
 
         Scene curScene = SceneManager.GetActiveScene();
         int sceneCount = SceneManager.sceneCountInBuildSettings;
-        if (curScene.buildIndex < sceneCount - 2) //Haedcoded, -2 because of the Win Scene and Lose Scene
+        int nextSceneIndex = curScene.buildIndex + 1;
+        if (nextSceneIndex < sceneCount - 2) //Haedcoded, -2 because of the Win Scene and Lose Scene
         {
-            SceneManager.LoadScene(curScene.buildIndex + 1);
+            curLevelBuildIndex = nextSceneIndex;
+            SceneManager.LoadScene(curLevelBuildIndex);
         } else
         {
             SceneManager.LoadScene("Win");
         }
+    }
+
+    public void ResetLevelProgress()
+    {
+        curLevelBuildIndex = 1;
     }
 }
