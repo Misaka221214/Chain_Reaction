@@ -17,7 +17,7 @@ public static class LevelData {
     public static bool level2BossIsDead = false;
     public static bool level3BossIsDead = false;
 
-    public static List<ObstacleEnum> playerObstacleList = new() { ObstacleEnum.BOOST, ObstacleEnum.ENLARGE, ObstacleEnum.BOUNCY };
+    public static List<ObstacleEnum> playerObstacleList = new() {};
 
     public static void ResetLevelData() {
         activeBalls = 0;
