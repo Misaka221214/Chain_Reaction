@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lose.unity
     guid: 6d73adba6f21eab4b95631d5c7248b10
+  - enabled: 1
+    path: Assets/Scenes/BuffSelection.unity
+    guid: 269949d97ab3617479dd782f416a3af6
   m_configObjects: {}
