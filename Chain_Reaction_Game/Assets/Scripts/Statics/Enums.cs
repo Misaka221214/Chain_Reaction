@@ -1,5 +1,4 @@
-public enum ObstacleEnum
-{
+public enum ObstacleEnum {
     BASIC,
     BOOST,
     JUMP,
@@ -12,5 +11,13 @@ public enum ObstacleEnum
     BOUNCY,
     HEAVY,
     TWICE,
-    FALL_STRAIGHT
+    FALL_STRAIGHT,
+    LEVEL_1_BOSS,
+    RANDOM
+}
+
+public enum LevelEnum {
+    LEVEL_1,
+    LEVEL_2,
+    LEVEL_3
 }
