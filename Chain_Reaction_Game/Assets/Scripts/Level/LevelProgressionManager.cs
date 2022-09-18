@@ -39,12 +39,12 @@ public class LevelProgressionManager : MonoBehaviour
 
         Scene curScene = SceneManager.GetActiveScene();
         int sceneCount = SceneManager.sceneCountInBuildSettings;
-        if (curScene.buildIndex < sceneCount)
+        if (curScene.buildIndex < sceneCount - 2) //Haedcoded, -2 because of the Win Scene and Lose Scene
         {
             SceneManager.LoadScene(curScene.buildIndex + 1);
         } else
         {
-            Debug.Log("TODO: Load some kinfd of Win Screen?");
+            SceneManager.LoadScene("Win");
         }
     }
 }
