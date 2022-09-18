@@ -10,7 +10,26 @@ public class ObstacleCollision : MonoBehaviour {
             case ObstacleEnum.BASIC:
                 BasicCollision();
                 break;
+            case ObstacleEnum.BOOST:
+                BasicCollision();
+                break;
+            case ObstacleEnum.JUMP:
+                BasicCollision();
+                break;
+            case ObstacleEnum.DUPLICATE:
+                BasicCollision();
+                break;
+            case ObstacleEnum.ENLARGE:
+                BasicCollision();
+                break;
+            case ObstacleEnum.BOUNCY:
+                BasicCollision();
+                break;
+            case ObstacleEnum.HEAVY:
+                BasicCollision();
+                break;
             default:
+                BasicCollision();
                 break;
         }
     }

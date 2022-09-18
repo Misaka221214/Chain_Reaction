@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5220495102996357892}
   m_Layer: 0
   m_Name: Basic Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drag: 0.9
+  boost: 10
