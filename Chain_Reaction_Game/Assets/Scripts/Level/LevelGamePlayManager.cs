@@ -6,6 +6,7 @@ public class LevelGamePlayManager : MonoBehaviour {
     private bool draggingBall = false;
 
     public LevelEnum level;
+    public GameObject ClickAndDragText;
 
     // Ball Launcher fields
     Rigidbody2D rb = null;
@@ -28,6 +29,9 @@ public class LevelGamePlayManager : MonoBehaviour {
     }
 
     void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            LevelProgressionManager.Instance.ReloadCurrentScreen();
+        }
         if (launchBall) {
             LaunchBall();
         }
@@ -38,8 +42,7 @@ public class LevelGamePlayManager : MonoBehaviour {
             case LevelEnum.LEVEL_1:
                 LevelData.level1RemainingBalls--;
                 if (LevelData.level1RemainingBalls < 0 && !LevelData.level1BossIsDead) {
-                    // TODO: Lose
-                    Debug.Log("Level 1 Lose");
+                    LevelProgressionManager.Instance.LoadLoseScreen();
                     return;
                 }
                 launchBall = true;
@@ -47,16 +50,14 @@ public class LevelGamePlayManager : MonoBehaviour {
             case LevelEnum.LEVEL_2:
                 LevelData.level2RemainingBalls--;
                 if (LevelData.level2RemainingBalls < 0 && !LevelData.level2BossIsDead) {
-                    // TODO: Lose
-                    Debug.Log("Level 2 Lose");
+                    LevelProgressionManager.Instance.LoadLoseScreen();
                     return;
                 }
                 break;
             case LevelEnum.LEVEL_3:
                 LevelData.level3RemainingBalls--;
                 if (LevelData.level3RemainingBalls < 0 && !LevelData.level3BossIsDead) {
-                    // TODO: Lose
-                    Debug.Log("Level 3 Lose");
+                    LevelProgressionManager.Instance.LoadLoseScreen();
                     return;
                 }
                 break;
@@ -66,6 +67,7 @@ public class LevelGamePlayManager : MonoBehaviour {
     }
 
     private void LaunchBall() {
+        ClickAndDragText.SetActive(true);
         if (Input.GetMouseButtonDown(0)) {
             startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             startPoint.z = 0;
@@ -88,6 +90,7 @@ public class LevelGamePlayManager : MonoBehaviour {
                 rb.AddForce(force * power, ForceMode2D.Impulse);
                 rb.gravityScale = 1f;
                 launchBall = false;
+                ClickAndDragText.SetActive(false);
             }
         }
     }

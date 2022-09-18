@@ -6,7 +6,7 @@ public class ObstacleCollision : MonoBehaviour {
     private readonly float damageAddition = 1f;
     private readonly float damageMinus = -0.5f;
     private readonly int specialObstacleThreshold = 5;
-    //private readonly float level1BossMaxHealth = 20f;
+    private readonly float level1BossMaxHealth = 20f;
 
     private GameObject ball;
     private float level1BossHealth = 20f;
@@ -16,7 +16,7 @@ public class ObstacleCollision : MonoBehaviour {
     public float deltaDamage = 0f;
 
     private void Start() {
-        if(obstacleType == ObstacleEnum.RANDOM) {
+        if (obstacleType == ObstacleEnum.RANDOM) {
             int chance = Random.Range(0, 100);
             GameObject prefab = Resources.Load(PrefabDict.prefabDict[ObstacleEnum.BASIC]) as GameObject;
             if (chance < specialObstacleThreshold) {
@@ -115,6 +115,19 @@ public class ObstacleCollision : MonoBehaviour {
             if (levelGamePlayManager) {
                 levelGamePlayManager.InstantiateBall();
             }
+        }
+    }
+
+    public float GetBossHealthPercentage(LevelEnum level) {
+        switch (level) {
+            case LevelEnum.LEVEL_1:
+                return level1BossHealth / level1BossMaxHealth;
+            //case LevelEnum.LEVEL_2:
+            //    break;
+            //case LevelEnum.LEVEL_3:
+            //    break;
+            default:
+                return 0f;
         }
     }
 
