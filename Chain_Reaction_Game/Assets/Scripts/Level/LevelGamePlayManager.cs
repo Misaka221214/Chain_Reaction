@@ -53,6 +53,7 @@ public class LevelGamePlayManager : MonoBehaviour {
                     LevelProgressionManager.Instance.LoadLoseScreen();
                     return;
                 }
+                launchBall = true;
                 break;
             case LevelEnum.LEVEL_3:
                 LevelData.level3RemainingBalls--;
@@ -60,6 +61,7 @@ public class LevelGamePlayManager : MonoBehaviour {
                     LevelProgressionManager.Instance.LoadLoseScreen();
                     return;
                 }
+                launchBall = true;
                 break;
             default:
                 break;
