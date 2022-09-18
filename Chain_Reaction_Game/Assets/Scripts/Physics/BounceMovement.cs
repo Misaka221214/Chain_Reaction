@@ -15,7 +15,6 @@ public class BounceMovement : MonoBehaviour {
     private int boostCollisionCount = 0;
     private bool boostFlag = false;
     private bool jumpFlag = false;
-    private float dragCoe = 0.8f;
     private bool heavyFlag = false;
     private float damageMultipler = 1f;
 
@@ -23,6 +22,7 @@ public class BounceMovement : MonoBehaviour {
     public float drag;
     public float boost;
     public float damage;
+    public float dragCoe = 0.8f;
 
     private void OnEnable() {
         rb = GetComponent<Rigidbody2D>();
