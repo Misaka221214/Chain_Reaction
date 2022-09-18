@@ -8,7 +8,7 @@ public class LevelProgressionManager : MonoBehaviour
 {
     public static LevelProgressionManager Instance { get; private set; }
 
-    public System.Action OnLevelPassed;
+    //public System.Action OnLevelPassed;
 
     private void Awake()
     {
@@ -19,7 +19,6 @@ public class LevelProgressionManager : MonoBehaviour
         else
         {
             Instance = this;
-            OnLevelPassed += HandleOnLevelPassed;
         }
     }
 
@@ -36,11 +35,16 @@ public class LevelProgressionManager : MonoBehaviour
 
     public void HandleOnLevelPassed()
     {
+        Debug.Log("Should load next scene");
+
         Scene curScene = SceneManager.GetActiveScene();
         int sceneCount = SceneManager.sceneCountInBuildSettings;
         if (curScene.buildIndex < sceneCount)
         {
             SceneManager.LoadScene(curScene.buildIndex + 1);
+        } else
+        {
+            Debug.Log("TODO: Load some kinfd of Win Screen?");
         }
     }
 }
