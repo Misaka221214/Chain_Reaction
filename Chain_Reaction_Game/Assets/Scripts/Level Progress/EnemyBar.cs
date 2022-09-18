@@ -18,7 +18,6 @@ public class EnemyBar : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("On Collision Enter");
         TakeDamage(2);
         if (health <= 0)
         {
