@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BounceMovement : MonoBehaviour {
-    private readonly int boostIncreament = 2;
+    private readonly float boostIncreament = 3f;
     private readonly float minSpeed = 1f;
     private readonly Vector2 jumpForce = new(0, 500);
     private readonly float fallThreshold = -3f;
@@ -12,7 +12,7 @@ public class BounceMovement : MonoBehaviour {
 
     private Vector2 lastFrameVelocity;
     private Rigidbody2D rb;
-    private int boostCollisionCount = 0;
+    private float boostCounter = 0;
     private bool boostFlag = false;
     private bool jumpFlag = false;
     private bool heavyFlag = false;
@@ -37,16 +37,17 @@ public class BounceMovement : MonoBehaviour {
                 SetJump(false);
             }
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
         // BOOST
         if (boostFlag) {
-            boostCollisionCount--;
-            if (boostCollisionCount <= 0) {
+            boostCounter -= Time.deltaTime;
+            if(boostCounter <= 0) {
                 SetBoost(false);
             }
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
 
         ObstacleCollision obstacle = collision.collider.GetComponentInChildren<ObstacleCollision>();
         ObstacleEnum obstacleEnum = ObstacleEnum.BASIC;
@@ -155,12 +156,12 @@ public class BounceMovement : MonoBehaviour {
     private void SetBoost(bool enable) {
         if (enable) {
             boostFlag = true;
-            boostCollisionCount = boostIncreament;
+            boostCounter = boostIncreament;
             SetDrag(false);
             SetGravity(false);
         } else {
             boostFlag = false;
-            boostCollisionCount = 0;
+            boostCounter = 0;
             SetDrag(true);
             SetGravity(true);
         }
