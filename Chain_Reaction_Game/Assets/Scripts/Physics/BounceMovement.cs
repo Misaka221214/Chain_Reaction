@@ -1,6 +1,15 @@
 using UnityEngine;
 
 public class BounceMovement : MonoBehaviour {
+    private readonly int boostIncreament = 5;
+    private readonly float minSpeed = 1f;
+    private readonly Vector2 jumpForce = new(0, 500);
+    private readonly float fallThreshold = -3f;
+    private readonly float enlargeScale = 1.5f;
+    private readonly float heavyDamageMultiplier = 1.5f;
+    private readonly float damageMultiply = 2f;
+    private readonly float damageDivision = 0.5f;
+
     private Vector2 lastFrameVelocity;
     private Rigidbody2D rb;
     private int boostCollisionCount = 0;
@@ -8,15 +17,12 @@ public class BounceMovement : MonoBehaviour {
     private bool jumpFlag = false;
     private float dragCoe = 0.8f;
     private bool heavyFlag = false;
+    private float damageMultipler = 1f;
 
-    private readonly int boostIncreament = 5;
-    private readonly float minSpeed = 1f;
-    private readonly Vector2 jumpForce = new(0, 500);
-    private readonly float fallThreshold = -3f;
-    private readonly float enlargeScale = 1.5f;
 
     public float drag;
     public float boost;
+    public float damage;
 
     private void OnEnable() {
         rb = GetComponent<Rigidbody2D>();
@@ -81,10 +87,37 @@ public class BounceMovement : MonoBehaviour {
             case ObstacleEnum.FALL_STRAIGHT:
                 FallStraight();
                 break;
+            case ObstacleEnum.DAMAGE_ADDITION:
+                Bounce(collision.contacts[0].normal);
+                break;
+            case ObstacleEnum.DAMAGE_MINUS:
+                Bounce(collision.contacts[0].normal);
+                break;
+            case ObstacleEnum.DAMAGE_MULTIPLY:
+                Bounce(collision.contacts[0].normal);
+                DamageMultiply();
+                break;
+            case ObstacleEnum.DAMAGE_DIVISION:
+                Bounce(collision.contacts[0].normal);
+                DamageDivision();
+                break;
             default:
                 Bounce(collision.contacts[0].normal);
                 break;
         }
+    }
+
+    public void AddDamage(float d) {
+        d *= damageMultipler;
+        damage += d;
+    }
+
+    private void DamageMultiply() {
+        damage *= damageMultiply;
+    }
+
+    private void DamageDivision() {
+        damage *= damageDivision;
     }
 
     private void Bounce(Vector2 collisionNormal) {
@@ -102,6 +135,7 @@ public class BounceMovement : MonoBehaviour {
 
     private void Heavy() {
         heavyFlag = true;
+        damageMultipler *= heavyDamageMultiplier;
     }
 
     private void Enlarge() {
