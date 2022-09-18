@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BounceMovement : MonoBehaviour {
-    private readonly int boostIncreament = 5;
+    private readonly int boostIncreament = 2;
     private readonly float minSpeed = 1f;
     private readonly Vector2 jumpForce = new(0, 500);
     private readonly float fallThreshold = -3f;
@@ -148,6 +148,7 @@ public class BounceMovement : MonoBehaviour {
 
     private void Duplicate() {
         GameObject go = Instantiate(gameObject);
+        LevelData.activeBalls++;
         go.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-200, 200), Random.Range(-200, 200)));
     }
 

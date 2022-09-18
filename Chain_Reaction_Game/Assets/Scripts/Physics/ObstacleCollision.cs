@@ -6,12 +6,12 @@ public class ObstacleCollision : MonoBehaviour {
     private readonly float damageAddition = 1f;
     private readonly float damageMinus = -0.5f;
     private readonly int specialObstacleThreshold = 5;
-    private readonly float level1BossMaxHealth = 20f;
+    private readonly float level1BossMaxHealth = 200f;
     private readonly float level2BossMaxHealth = 20f;
     private readonly float level3BossMaxHealth = 20f;
 
     private GameObject ball;
-    private float level1BossHealth = 20f;
+    private float level1BossHealth = 200f;
     private float level2BossHealth = 20f;
     private float level3BossHealth = 20f;
 
@@ -120,7 +120,7 @@ public class ObstacleCollision : MonoBehaviour {
         }
 
         GameObject gamePlayManagerObject = GameObject.Find("LevelGamePlayManager");
-        if (gamePlayManagerObject) {
+        if (gamePlayManagerObject && LevelData.activeBalls <= 0) {
             LevelGamePlayManager levelGamePlayManager = gamePlayManagerObject.GetComponentInChildren<LevelGamePlayManager>();
             if (levelGamePlayManager) {
                 levelGamePlayManager.InstantiateBall();
@@ -144,7 +144,7 @@ public class ObstacleCollision : MonoBehaviour {
         }
 
         GameObject gamePlayManagerObject = GameObject.Find("LevelGamePlayManager");
-        if (gamePlayManagerObject) {
+        if (gamePlayManagerObject && LevelData.activeBalls <= 0) {
             LevelGamePlayManager levelGamePlayManager = gamePlayManagerObject.GetComponentInChildren<LevelGamePlayManager>();
             if (levelGamePlayManager) {
                 levelGamePlayManager.InstantiateBall();
@@ -168,7 +168,7 @@ public class ObstacleCollision : MonoBehaviour {
         }
 
         GameObject gamePlayManagerObject = GameObject.Find("LevelGamePlayManager");
-        if (gamePlayManagerObject) {
+        if (gamePlayManagerObject && LevelData.activeBalls <= 0) {
             LevelGamePlayManager levelGamePlayManager = gamePlayManagerObject.GetComponentInChildren<LevelGamePlayManager>();
             if (levelGamePlayManager) {
                 levelGamePlayManager.InstantiateBall();
